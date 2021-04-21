@@ -25,6 +25,8 @@ public class View {
         center.setBackground(Color.BLACK);
         Card test = new Card(CardsEnum.Red_0);
         Card test2 = new Card(CardsEnum.Deck);
+        m.removeDeck(CardsEnum.Deck);
+        m.removeDeck(CardsEnum.Red_0);
         center.add(test);
         center.add(test2);
         f.add(deck,BorderLayout.SOUTH);

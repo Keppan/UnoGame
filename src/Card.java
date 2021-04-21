@@ -5,32 +5,23 @@ import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 public class Card extends JPanel {
-    private String type;
+    private int type;
     private String Color;
     private BufferedImage img;
 
     public Card(CardsEnum s){
         setMinimumSize(new Dimension(10,10));
-        //  setMinimumSize(new Dimension(500,500));
-        //   setSize(new Dimension(500,500));
-        //   System.out.println(getSize());
         setPreferredSize(new Dimension(120, 200));
         initImg(s.name());
         setVisible(true);
-    }
-    public Card(String type, String Color){
-        this.type = type;
-        this.Color = Color;
-        setMinimumSize(new Dimension(10,10));
-      //  setMinimumSize(new Dimension(500,500));
-     //   setSize(new Dimension(500,500));
-     //   System.out.println(getSize());
-        setPreferredSize(new Dimension(120, 200));
-        initImg();
-        setVisible(true);
+        if(!s.name().equals("Deck")){
+            type = Integer.parseInt(s.name().substring(s.name().indexOf("_")+1));
+            Color = s.name().substring(0,s.name().indexOf("_"));
+        }
+        System.out.println(type +" and "+ Color);
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return type;
     }
 
