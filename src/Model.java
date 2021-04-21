@@ -17,4 +17,8 @@ public class Model {
     public void removeDeck(CardsEnum e){
         cards.remove(e);
     }
+    public void seeCard(Card c){
+        System.out.println(c.getColor()+ " " + c.getNumber());
+    }
+
 }
