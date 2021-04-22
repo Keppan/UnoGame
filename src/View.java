@@ -3,8 +3,7 @@ import java.awt.*;
 import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class View implements PropertyChangeListener {
     private JFrame f = new JFrame();
@@ -14,10 +13,10 @@ public class View implements PropertyChangeListener {
     private JPanel info = new JPanel();
     private JPanel deck = new JPanel();
     private Card activeCard;
-    private List<CardsEnum> cards;
+    private Card[] cards;
 
     public View(Model m) {
-        cards = m.getCards();
+        cards = m.getDeckCard();
         m.addPropertyChangeListener(this);
         this.m = m;
         f.setLayout(new BorderLayout());
@@ -41,15 +40,9 @@ public class View implements PropertyChangeListener {
         center.add(cardPile);
         center.add(activeCard);
 
-        List<CardsEnum> temp = new ArrayList<>();
-        for(int i = 0; i < 7; i++){
-            Card c = new Card(cards.get(i));
+        for (Card c : cards){
             c.addMouseListener(adapter);
             deck.add(c);
-            temp.add(cards.get(i));
-        }
-        for (CardsEnum e : temp){
-            m.removeDeck(e);
         }
     }
     public void setAdapter(MouseListener adapter){
@@ -60,15 +53,16 @@ public class View implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        deck.remove((Card)evt.getNewValue());
         center.remove(activeCard);
-        activeCard = m.getActiveCard();
-        activeCard.addMouseListener(adapter);
-        center.add(activeCard);
-        deck.repaint();
-        center.repaint();
-        System.out.println("TESTESTSTS");
+      //  deck.remove((Card)evt.getNewValue());
+        center.add((Card)evt.getNewValue());
+        activeCard = (Card)evt.getNewValue();
+
+       // activeCard.addMouseListener(adapter); HÄR VAR FELET!!!!!
+       // deck.repaint();
+       // center.repaint();
         f.repaint();
         f.validate();
+        System.out.println(Arrays.toString(center.getComponents()));
     }
 }

@@ -2,6 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 
 public class Controller implements MouseListener {
     private Model m;
@@ -14,13 +15,14 @@ public class Controller implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-       Card c = (Card)e.getSource();
-        m.seeCard(c);
+       // Card c = (Card)e.getSource();
+       // m.seeCard(c);
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        Card c = (Card)e.getSource();
+        m.seeCard(c);
     }
 
     @Override

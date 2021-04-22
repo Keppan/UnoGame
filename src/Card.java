@@ -8,19 +8,19 @@ public class Card extends JPanel {
     private int type;
     private String Color;
     private BufferedImage img;
-    private CardsEnum identifier;
-
+    private CardsEnum enumIdentifier;
+    private int x;
+    private int y;
     public Card(CardsEnum s){
-        identifier = s;
+        enumIdentifier = s;
         setMinimumSize(new Dimension(10,10));
         setPreferredSize(new Dimension(120, 200));
-        initImg(s.name());
+        initImg();
         setVisible(true);
         if(!s.name().equals("Deck")){
             type = Integer.parseInt(s.name().substring(s.name().indexOf("_")+1));
             Color = s.name().substring(0,s.name().indexOf("_"));
         }
-        System.out.println(type +" and "+ Color);
     }
 
     public int getNumber() {
@@ -31,17 +31,9 @@ public class Card extends JPanel {
         return Color;
     }
 
-    private void initImg(String s ) {
-        try {
-            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Assets/" +s+".png")));
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-        }
-    }
-
     private void initImg() {
         try {
-            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Assets/" + Color + "_" + type + ".png")));
+            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Assets/" +enumIdentifier+".png")));
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
@@ -49,14 +41,19 @@ public class Card extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(img,0,0, getWidth(), getHeight(), null);
+        g.drawImage(img,x,y, getWidth(), getHeight(), null);
 
+    }
+    public void move(){
+        x++;
+        y++;
+        repaint();
     }
     public String toString(){
         return Color + " " + type;
     }
 
     public CardsEnum getIdentifier() {
-        return identifier;
+        return enumIdentifier;
     }
 }
