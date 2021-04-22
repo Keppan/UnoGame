@@ -50,4 +50,7 @@ public class Card extends JPanel {
         g.drawImage(img,0,0, getWidth(), getHeight(), null);
 
     }
+    public String toString(){
+        return Color + " " + type;
+    }
 }

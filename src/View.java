@@ -29,12 +29,11 @@ public class View {
     }
 
     private void initDeck(){
-        Card activeCard = new Card(CardsEnum.Red_0);
+        Card activeCard = m.getActiveCard();
         Card cardPile = new Card(CardsEnum.Deck);
         activeCard.addMouseListener(adapter);
         cardPile.addMouseListener(adapter);
         m.removeDeck(CardsEnum.Deck);
-        m.removeDeck(CardsEnum.Red_0);
         center.add(activeCard);
         center.add(cardPile);
 
