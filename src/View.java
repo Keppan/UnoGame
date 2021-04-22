@@ -1,20 +1,24 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class View {
+public class View implements PropertyChangeListener {
     private JFrame f = new JFrame();
     private MouseListener adapter;
     private Model m;
     private JPanel center = new JPanel();
     private JPanel info = new JPanel();
     private JPanel deck = new JPanel();
+    private Card activeCard;
     private List<CardsEnum> cards;
 
     public View(Model m) {
         cards = m.getCards();
+        m.addPropertyChangeListener(this);
         this.m = m;
         f.setLayout(new BorderLayout());
         f.setMinimumSize(new Dimension(1200, 500));
@@ -29,13 +33,13 @@ public class View {
     }
 
     private void initDeck(){
-        Card activeCard = m.getActiveCard();
+        activeCard = m.getActiveCard();
         Card cardPile = new Card(CardsEnum.Deck);
         activeCard.addMouseListener(adapter);
         cardPile.addMouseListener(adapter);
         m.removeDeck(CardsEnum.Deck);
-        center.add(activeCard);
         center.add(cardPile);
+        center.add(activeCard);
 
         List<CardsEnum> temp = new ArrayList<>();
         for(int i = 0; i < 7; i++){
@@ -52,5 +56,19 @@ public class View {
         this.adapter = adapter;
         initDeck();
         f.setVisible(true);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        deck.remove((Card)evt.getNewValue());
+        center.remove(activeCard);
+        activeCard = m.getActiveCard();
+        activeCard.addMouseListener(adapter);
+        center.add(activeCard);
+        deck.repaint();
+        center.repaint();
+        System.out.println("TESTESTSTS");
+        f.repaint();
+        f.validate();
     }
 }

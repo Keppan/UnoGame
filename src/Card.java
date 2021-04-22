@@ -8,8 +8,10 @@ public class Card extends JPanel {
     private int type;
     private String Color;
     private BufferedImage img;
+    private CardsEnum identifier;
 
     public Card(CardsEnum s){
+        identifier = s;
         setMinimumSize(new Dimension(10,10));
         setPreferredSize(new Dimension(120, 200));
         initImg(s.name());
@@ -52,5 +54,9 @@ public class Card extends JPanel {
     }
     public String toString(){
         return Color + " " + type;
+    }
+
+    public CardsEnum getIdentifier() {
+        return identifier;
     }
 }
