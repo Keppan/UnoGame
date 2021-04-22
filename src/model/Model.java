@@ -1,3 +1,8 @@
+package model;
+
+import gameclasses.Card;
+import gameclasses.CardsEnum;
+
 import javax.swing.border.EtchedBorder;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
@@ -45,10 +50,10 @@ public class Model extends PropertyChangeSupport {
                     markedCard = null;
                     return;
                 }
-               // removeDeck(activeCard.getIdentifier());
+                removeDeck(activeCard.getIdentifier());
                 activeCard = markedCard;
                 activeCard.setBorder(null);
-               // removeDeck(markedCard.getIdentifier());
+                removeDeck(markedCard.getIdentifier());
                 firePropertyChange("updateCard",null,activeCard);
             }
         }
@@ -57,6 +62,8 @@ public class Model extends PropertyChangeSupport {
         markedCard = null;
         c.setBorder(null);
     }
+
+
 
     public Card getActiveCard() {
         return activeCard;

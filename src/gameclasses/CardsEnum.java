@@ -1,3 +1,5 @@
+package gameclasses;
+
 public enum CardsEnum {
     //10 = +2 , 11 = Reverse , 12 = Block , 13 = Färg , 14 = + 4
     Blue_0,Blue_1,Blue_2,Blue_3,Blue_4,Blue_5,Blue_6,Blue_7,Blue_8,Blue_9,

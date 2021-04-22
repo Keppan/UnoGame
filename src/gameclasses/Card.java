@@ -1,14 +1,16 @@
+package gameclasses;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Card extends JPanel {
+public class Card extends JPanel implements Serializable {
     private int type;
     private String Color;
-    private BufferedImage img;
-    private CardsEnum enumIdentifier;
+    private final CardsEnum enumIdentifier;
     private int x;
     private int y;
     public Card(CardsEnum s){
@@ -33,7 +35,7 @@ public class Card extends JPanel {
 
     private void initImg() {
         try {
-            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Assets/" +enumIdentifier+".png")));
+         //   img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Assets/" +enumIdentifier+".png")));
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
@@ -41,7 +43,12 @@ public class Card extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(img,x,y, getWidth(), getHeight(), null);
+        try {
+            g.drawImage(ImageIO.read(Objects.requireNonNull(getClass().getResource("/assets/" +enumIdentifier+".png")))
+                        ,x,y, getWidth(), getHeight(), null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
     public void move(){

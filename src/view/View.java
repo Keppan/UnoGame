@@ -1,3 +1,9 @@
+package view;
+
+import gameclasses.Card;
+import gameclasses.CardsEnum;
+import model.Model;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
@@ -54,7 +60,7 @@ public class View implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         center.remove(activeCard);
-      //  deck.remove((Card)evt.getNewValue());
+      //  deck.remove((Gameclasses.Card)evt.getNewValue());
         center.add((Card)evt.getNewValue());
         activeCard = (Card)evt.getNewValue();
 

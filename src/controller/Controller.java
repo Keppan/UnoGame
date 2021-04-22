@@ -1,8 +1,10 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+package controller;
+
+import gameclasses.Card;
+import view.View;
+import model.Model;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Arrays;
 
 public class Controller implements MouseListener {
     private Model m;
@@ -15,7 +17,7 @@ public class Controller implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-       // Card c = (Card)e.getSource();
+       // Gameclasses.Card c = (Gameclasses.Card)e.getSource();
        // m.seeCard(c);
     }
 
