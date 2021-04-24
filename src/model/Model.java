@@ -5,6 +5,7 @@ import gameclasses.CardsEnum;
 
 import javax.swing.border.EtchedBorder;
 import java.beans.PropertyChangeSupport;
+import java.io.IOException;
 import java.util.*;
 
 public class Model extends PropertyChangeSupport {
@@ -12,7 +13,7 @@ public class Model extends PropertyChangeSupport {
     private Card activeCard;
     private Card markedCard;
     private Card[] deckCard;
-
+    private Connection client;
     public Model(){
         super("böna");
         deckCard = new Card[7];
@@ -26,6 +27,7 @@ public class Model extends PropertyChangeSupport {
             deckCard[i] = c;
             cards.remove(c.getIdentifier());
         }
+        client = new Connection();
 
     }
 
@@ -55,6 +57,12 @@ public class Model extends PropertyChangeSupport {
                 activeCard.setBorder(null);
                 removeDeck(markedCard.getIdentifier());
                 firePropertyChange("updateCard",null,activeCard);
+                try {
+                    client.sendActiveCard(activeCard);
+                } catch (IOException e ){
+                    e.printStackTrace();
+                }
+
             }
         }
         assert markedCard != null;
