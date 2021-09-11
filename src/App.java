@@ -7,6 +7,5 @@ public class App {
         Model m = new Model();
         View v = new View(m);
         new Controller(m,v);
-
     }
 }
